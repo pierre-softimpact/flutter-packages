@@ -24,7 +24,6 @@ flutter:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_svg: ^2.0.9
   html: ^0.15.0
   video_player_android: ^2.3.5
   video_player_avfoundation: ^2.5.0
