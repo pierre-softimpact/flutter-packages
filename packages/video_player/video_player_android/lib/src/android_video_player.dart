@@ -170,6 +170,58 @@ class AndroidVideoPlayer extends VideoPlayerPlatform {
         .setMixWithOthers(MixWithOthersMessage(mixWithOthers: mixWithOthers));
   }
 
+  @override
+  Future<bool> isPictureInPictureSupported() {
+    return _api.isPictureInPictureSupported();
+  }
+
+  @override
+  Future<void> setAutomaticallyStartsPictureInPicture({
+    required int textureId,
+    required bool enableStartPictureInPictureAutomaticallyFromInline,
+  }) {
+    return _api.setAutomaticallyStartsPictureInPicture(
+      AutomaticallyStartsPictureInPictureMessage(
+        textureId: textureId,
+        enableStartPictureInPictureAutomaticallyFromInline:
+            enableStartPictureInPictureAutomaticallyFromInline,
+      ),
+    );
+  }
+
+  @override
+  Future<void> setPictureInPictureOverlaySettings({
+    required int textureId,
+    required PictureInPictureOverlaySettings settings,
+  }) {
+    return _api.setPictureInPictureOverlaySettings(
+      SetPictureInPictureOverlaySettingsMessage(
+        textureId: textureId,
+        settings: PictureInPictureOverlaySettingsMessage(
+          top: settings.rect.top,
+          left: settings.rect.left,
+          width: settings.rect.width,
+          height: settings.rect.height,
+        ),
+      ),
+    );
+  }
+
+  @override
+  Future<void> startPictureInPicture(int textureId) {
+    return _api.startPictureInPicture(StartPictureInPictureMessage(
+      textureId: textureId,
+    ));
+  }
+
+  @override
+  Future<void> stopPictureInPicture(int textureId) {
+    return _api.stopPictureInPicture(StopPictureInPictureMessage(
+      textureId: textureId,
+    ));
+  }
+
+
   EventChannel _eventChannelFor(int textureId) {
     return EventChannel('flutter.io/videoPlayer/videoEvents$textureId');
   }
